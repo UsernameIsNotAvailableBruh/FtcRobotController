@@ -29,7 +29,7 @@ public class GyroTest extends LinearOpMode {
         IMU.Parameters IMUParams = new IMU.Parameters(
                 new RevHubOrientationOnRobot(
                         RevHubOrientationOnRobot.LogoFacingDirection.UP,
-                        RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD
+                        RevHubOrientationOnRobot.UsbFacingDirection.FORWARD
                 )
         );
         Gyro.initialize(IMUParams);
@@ -40,7 +40,12 @@ public class GyroTest extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
-            Orientation robotOrientation = Gyro.getRobotOrientation(
+            Orientation RAD = Gyro.getRobotOrientation(
+                    AxesReference.INTRINSIC,
+                    AxesOrder.XYZ,
+                    AngleUnit.RADIANS
+            );
+            Orientation DEG = Gyro.getRobotOrientation(
                     AxesReference.INTRINSIC,
                     AxesOrder.XYZ,
                     AngleUnit.RADIANS
@@ -49,10 +54,10 @@ public class GyroTest extends LinearOpMode {
                 Gyro.resetYaw();
             }
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("idk what quadternion is", Gyro.getRobotOrientationAsQuaternion().normalized());
-            telemetry.addData("Gyro Angles", "%4.2f", robotOrientation.thirdAngle);
-            double Direction1 = Math.sin(Math.PI/4  - robotOrientation.thirdAngle); // https://www.desmos.com/calculator/rqqamhfeek
-            double Direction2 = Math.sin(-Math.PI/4 - robotOrientation.thirdAngle); // https://www.desmos.com/calculator/dminewe5vs
+            telemetry.addData("Gyro Angle", "%4.2f", DEG.thirdAngle);
+            telemetry.addData("Theta Angle", "%4.2f", Math.atan2(gamepad1.left_stick_x, gamepad1.right_stick_y));
+            double Direction1 = Math.sin(Math.atan2(gamepad1.left_stick_x, gamepad1.right_stick_y) + Math.PI/4 - RAD.thirdAngle); // https://www.desmos.com/calculator/rqqamhfeek
+            double Direction2 = Math.sin(Math.atan2(gamepad1.left_stick_x, gamepad1.right_stick_y)  + -Math.PI/4 - RAD.thirdAngle); // https://www.desmos.com/calculator/dminewe5vs
             telemetry.addData("Sins, unscaled", "%4.2f %4.2f", Direction1, Direction2);
             Direction1 *= 2;
             Direction2 *= 2;
@@ -61,7 +66,7 @@ public class GyroTest extends LinearOpMode {
                 Direction1  /= max ;
                 Direction2 /= max ;
             }
-            telemetry.addData("Sins, scaled", "%4.2f %4.2f", Direction1, Direction2);
+            telemetry.addData("Sins, scaled", "LF/RB%4.2f RF/LB%4.2f", Direction1, Direction2);
             telemetry.update();
         }
     }}
