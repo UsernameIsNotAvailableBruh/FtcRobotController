@@ -20,10 +20,10 @@ public class FConstants {
         FollowerConstants.rightFrontMotorName = "rightFrontDrive";
         FollowerConstants.rightRearMotorName = "rightBackDrive";
 
-        FollowerConstants.leftFrontMotorDirection = DcMotor.Direction.REVERSE;
-        FollowerConstants.leftRearMotorDirection = DcMotor.Direction.REVERSE;
-        FollowerConstants.rightFrontMotorDirection = DcMotor.Direction.FORWARD;
-        FollowerConstants.rightRearMotorDirection = DcMotor.Direction.REVERSE;
+        FollowerConstants.leftFrontMotorDirection = DcMotor.Direction.FORWARD;
+        FollowerConstants.leftRearMotorDirection = DcMotor.Direction.FORWARD;
+        FollowerConstants.rightFrontMotorDirection = DcMotor.Direction.REVERSE;
+        FollowerConstants.rightRearMotorDirection = DcMotor.Direction.FORWARD;
 
         FollowerConstants.mass = 13.1; //kg
 
@@ -38,7 +38,7 @@ public class FConstants {
         PinpointConstants.useCustomEncoderResolution = false;
         PinpointConstants.encoderResolution = GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_SWINGARM_POD;
         PinpointConstants.customEncoderResolution = 13.26291192;
-        PinpointConstants.forwardEncoderDirection = GoBildaPinpointDriver.EncoderDirection.FORWARD;
+        PinpointConstants.forwardEncoderDirection = GoBildaPinpointDriver.EncoderDirection.REVERSED;
         PinpointConstants.strafeEncoderDirection = GoBildaPinpointDriver.EncoderDirection.REVERSED;
 
         FollowerConstants.xMovement = 57.8741;
