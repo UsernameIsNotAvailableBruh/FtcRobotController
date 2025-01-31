@@ -1,26 +1,45 @@
-package org.firstinspires.ftc.teamcode.pedroPathing.constants;
+package pedroPathing.constants;
 
+import com.pedropathing.localization.GoBildaPinpointDriver;
 import com.pedropathing.localization.Localizers;
 import com.pedropathing.follower.FollowerConstants;
+import com.pedropathing.localization.constants.PinpointConstants;
 import com.pedropathing.util.CustomFilteredPIDFCoefficients;
 import com.pedropathing.util.CustomPIDFCoefficients;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class FConstants {
     static {
-        FollowerConstants.localizers = Localizers.THREE_WHEEL;
+        FollowerConstants.localizers = Localizers.PINPOINT;
 
-        FollowerConstants.leftFrontMotorName = "leftFront";
-        FollowerConstants.leftRearMotorName = "leftRear";
-        FollowerConstants.rightFrontMotorName = "rightFront";
-        FollowerConstants.rightRearMotorName = "rightRear";
+        FollowerConstants.leftFrontMotorName = "leftFrontDrive";
+        FollowerConstants.leftRearMotorName = "leftBackDrive";
+        FollowerConstants.rightFrontMotorName = "rightFrontDrive";
+        FollowerConstants.rightRearMotorName = "rightBackDrive";
 
-        FollowerConstants.leftFrontMotorDirection = DcMotorSimple.Direction.REVERSE;
-        FollowerConstants.leftRearMotorDirection = DcMotorSimple.Direction.REVERSE;
-        FollowerConstants.rightFrontMotorDirection = DcMotorSimple.Direction.FORWARD;
-        FollowerConstants.rightRearMotorDirection = DcMotorSimple.Direction.FORWARD;
+        FollowerConstants.leftFrontMotorDirection = DcMotor.Direction.REVERSE;
+        FollowerConstants.leftRearMotorDirection = DcMotor.Direction.REVERSE;
+        FollowerConstants.rightFrontMotorDirection = DcMotor.Direction.FORWARD;
+        FollowerConstants.rightRearMotorDirection = DcMotor.Direction.REVERSE;
 
-        FollowerConstants.mass = 13;
+        FollowerConstants.mass = 13.1; //kg
+
+        //PinpointConstants.forwardY = -8.5;
+        //PinpointConstants.strafeX = 0;
+        PinpointConstants.forwardY = -7;
+        PinpointConstants.strafeX = 0;
+        PinpointConstants.distanceUnit = DistanceUnit.CM;
+        PinpointConstants.hardwareMapName = "pinpoint";
+        PinpointConstants.useYawScalar = false;
+        PinpointConstants.yawScalar = 1.0;
+        PinpointConstants.useCustomEncoderResolution = false;
+        PinpointConstants.encoderResolution = GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_SWINGARM_POD;
+        PinpointConstants.customEncoderResolution = 13.26291192;
+        PinpointConstants.forwardEncoderDirection = GoBildaPinpointDriver.EncoderDirection.FORWARD;
+        PinpointConstants.strafeEncoderDirection = GoBildaPinpointDriver.EncoderDirection.REVERSED;
 
         FollowerConstants.xMovement = 57.8741;
         FollowerConstants.yMovement = 52.295;

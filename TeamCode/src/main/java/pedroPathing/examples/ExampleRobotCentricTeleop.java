@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.pedroPathing.examples;
+package pedroPathing.examples;
 
 import android.provider.SyncStateContract;
 

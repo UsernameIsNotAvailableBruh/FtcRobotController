@@ -29,11 +29,14 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import java.util.List;
 
 /*
  * This file contains an example of a Linear "OpMode".
@@ -78,10 +81,10 @@ public class BasicOmniOpMode extends LinearOpMode {
 
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
-        leftFrontDrive  = hardwareMap.get(DcMotor.class, "left_front_drive");
-        leftBackDrive  = hardwareMap.get(DcMotor.class, "left_back_drive");
-        rightFrontDrive = hardwareMap.get(DcMotor.class, "right_front_drive");
-        rightBackDrive = hardwareMap.get(DcMotor.class, "right_back_drive");
+        leftFrontDrive  = hardwareMap.get(DcMotor.class, "leftFrontDrive");
+        leftBackDrive  = hardwareMap.get(DcMotor.class, "leftBackDrive");
+        rightFrontDrive = hardwareMap.get(DcMotor.class, "rightFrontDrive");
+        rightBackDrive = hardwareMap.get(DcMotor.class, "rightBackDrive");
 
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
@@ -96,17 +99,29 @@ public class BasicOmniOpMode extends LinearOpMode {
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
 
         // Wait for the game to start (driver presses START)
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
+        List<LynxModule> allHubs = hardwareMap.getAll(LynxModule.class);
+
+        for (LynxModule hub : allHubs) {
+            hub.setBulkCachingMode(LynxModule.BulkCachingMode.MANUAL);
+        }
+
         waitForStart();
         runtime.reset();
-
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
+            // Will run one bulk read per cycle,
+            // even as frontLeftMotor.getCurrentPosition() is called twice
+            // because the caches are being handled manually and cleared
+            // once a loop
+            for (LynxModule hub : allHubs) {
+                hub.clearBulkCache();
+            }
             double max;
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
