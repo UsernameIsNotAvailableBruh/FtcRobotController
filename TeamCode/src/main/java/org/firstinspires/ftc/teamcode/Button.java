@@ -1,3 +1,4 @@
+/*
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -92,4 +93,4 @@ private class Buttons { //To add new buttons, just append it to the bottom of bu
             return status;
         }
     }
-}
+}*/

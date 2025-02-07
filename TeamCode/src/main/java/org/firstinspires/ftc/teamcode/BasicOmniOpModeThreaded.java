@@ -69,15 +69,17 @@ import java.util.List;
  */
 
 @Config
-@TeleOp(name="Basic: Omni Linear OpMode", group="Linear OpMode")
-public class BasicOmniOpMode extends LinearOpMode {
+@TeleOp(name="T: Omni Linear OpMode", group="Linear OpMode")
+public class BasicOmniOpModeThreaded extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor leftFrontDrive = null;
-    private DcMotor leftBackDrive = null;
-    private DcMotor rightFrontDrive = null;
-    private DcMotor rightBackDrive = null;
+    private ThreadedDcMotor leftFrontDrive = null;
+    private ThreadedDcMotor leftBackDrive = null;
+    private ThreadedDcMotor rightFrontDrive = null;
+    private ThreadedDcMotor rightBackDrive = null;
+
+    public static boolean offToggle = false;
 
     int indexSR = 0;
     public static int amtSR = 1000;
@@ -87,10 +89,10 @@ public class BasicOmniOpMode extends LinearOpMode {
     public void runOpMode() {
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
-        leftFrontDrive  = (hardwareMap.get(DcMotor.class, "leftFrontDrive"));
-        leftBackDrive  = (hardwareMap.get(DcMotor.class, "leftBackDrive"));
-        rightFrontDrive = (hardwareMap.get(DcMotor.class, "rightFrontDrive"));
-        rightBackDrive = (hardwareMap.get(DcMotor.class, "rightBackDrive"));
+        leftFrontDrive  = new ThreadedDcMotor(hardwareMap.get(DcMotor.class, "leftFrontDrive"));
+        leftBackDrive  = new ThreadedDcMotor(hardwareMap.get(DcMotor.class, "leftBackDrive"));
+        rightFrontDrive = new ThreadedDcMotor(hardwareMap.get(DcMotor.class, "rightFrontDrive"));
+        rightBackDrive = new ThreadedDcMotor(hardwareMap.get(DcMotor.class, "rightBackDrive"));
 
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!

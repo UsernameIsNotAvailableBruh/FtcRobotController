@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
+
 public class FConstants {
     static {
         FollowerConstants.localizers = Localizers.PINPOINT;
@@ -27,39 +28,25 @@ public class FConstants {
 
         FollowerConstants.mass = 13.1; //kg
 
-        //PinpointConstants.forwardY = -8.5;
-        //PinpointConstants.strafeX = 0;
-        PinpointConstants.forwardY = -7;
-        PinpointConstants.strafeX = 0;
-        PinpointConstants.distanceUnit = DistanceUnit.CM;
-        PinpointConstants.hardwareMapName = "pinpoint";
-        PinpointConstants.useYawScalar = false;
-        PinpointConstants.yawScalar = 1.0;
-        PinpointConstants.useCustomEncoderResolution = false;
-        PinpointConstants.encoderResolution = GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_SWINGARM_POD;
-        PinpointConstants.customEncoderResolution = 13.26291192;
-        PinpointConstants.forwardEncoderDirection = GoBildaPinpointDriver.EncoderDirection.REVERSED;
-        PinpointConstants.strafeEncoderDirection = GoBildaPinpointDriver.EncoderDirection.REVERSED;
+        FollowerConstants.xMovement = (59.5724+59.9676+58.506+58.8006)/4;
+        FollowerConstants.yMovement = (50.2009+48.8625+49.2683+49.4428)/4;
 
-        FollowerConstants.xMovement = 57.8741;
-        FollowerConstants.yMovement = 52.295;
+        FollowerConstants.forwardZeroPowerAcceleration = (-30.7856-28.8964-29.062-31.554)/4;
+        FollowerConstants.lateralZeroPowerAcceleration = (-65.9526-59.5283-54.4454-59.5369)/4;
 
-        FollowerConstants.forwardZeroPowerAcceleration = -41.278;
-        FollowerConstants.lateralZeroPowerAcceleration = -59.7819;
-
-        FollowerConstants.translationalPIDFCoefficients.setCoefficients(0.1,0,0.01,0);
+        FollowerConstants.translationalPIDFCoefficients.setCoefficients(0.15,0,.01,0);
         FollowerConstants.useSecondaryTranslationalPID = false;
         FollowerConstants.secondaryTranslationalPIDFCoefficients.setCoefficients(0.1,0,0.01,0); // Not being used, @see useSecondaryTranslationalPID
 
-        FollowerConstants.headingPIDFCoefficients.setCoefficients(2,0,0.1,0);
+        FollowerConstants.headingPIDFCoefficients.setCoefficients(1.5,0,0.02,0);
         FollowerConstants.useSecondaryHeadingPID = false;
         FollowerConstants.secondaryHeadingPIDFCoefficients.setCoefficients(2,0,0.1,0); // Not being used, @see useSecondaryHeadingPID
 
-        FollowerConstants.drivePIDFCoefficients.setCoefficients(0.1,0,0,0.6,0);
+        FollowerConstants.drivePIDFCoefficients.setCoefficients(.015,0,.000001,0.6,0);
         FollowerConstants.useSecondaryDrivePID = false;
         FollowerConstants.secondaryDrivePIDFCoefficients.setCoefficients(0.1,0,0,0.6,0); // Not being used, @see useSecondaryDrivePID
 
-        FollowerConstants.zeroPowerAccelerationMultiplier = 4;
+        FollowerConstants.zeroPowerAccelerationMultiplier = 3; //2 to 6
         FollowerConstants.centripetalScaling = 0.0005;
 
         FollowerConstants.pathEndTimeoutConstraint = 500;
